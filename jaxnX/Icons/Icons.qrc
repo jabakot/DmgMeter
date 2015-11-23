@@ -4,5 +4,6 @@
         <file>Help.png</file>
         <file>Opacity.png</file>
         <file>Reset.png</file>
+        <file>Auto_Reset_On.png</file>
     </qresource>
 </RCC>

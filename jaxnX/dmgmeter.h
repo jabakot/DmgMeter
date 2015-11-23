@@ -31,6 +31,7 @@ namespace GW2
         int m_TimeSinceEvaluation;
         int m_Dmg;
         int m_MaxDmg;
+        int m_Timer_i;
         bool m_IsActive;
         bool m_IsAutoResetting;
 

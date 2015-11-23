@@ -60,8 +60,10 @@ DmgMeter::DmgMeter() :
     m_TimeSinceEvaluation(0),
     m_Dmg(0),
     m_MaxDmg(0),
+    m_Timer_i(0),
     m_IsActive(false),
     m_IsAutoResetting(false)
+
 {
     QObject::connect(&m_Timer, SIGNAL(timeout()), this, SLOT(ComputeDps()));
 
@@ -85,7 +87,9 @@ void DmgMeter::ComputeDps()
 {
     ++m_TimeSinceCombat;
     ++m_TimeSinceEvaluation;
-    m_Dps = m_Dmg / m_TimeSinceCombat;
+    ++m_Timer_i;
+    m_Dps = m_Dmg / m_Timer_i;
+
     emit RequestDpsUpdate(m_Dps);
     if (m_TimeSinceEvaluation >= 3)
     {
@@ -130,6 +134,7 @@ void DmgMeter::EvaluateImage(const QImage& image, const ImageAttributes& imageAt
 
 void DmgMeter::Reset(bool emitSignals)
 {
+    m_Timer_i=0;
     m_Dmg = 0;
     m_Dps = 0;
     m_MaxDmg = 0;

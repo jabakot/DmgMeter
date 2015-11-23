@@ -240,7 +240,8 @@
    </property>
    <property name="icon">
     <iconset resource="Icons/Icons.qrc">
-     <normaloff>:/Auto_Reset.png</normaloff>:/Auto_Reset.png</iconset>
+     <normaloff>:/Auto_Reset.png</normaloff>
+     <normalon>:/Auto_Reset_On.png</normalon>:/Auto_Reset.png</iconset>
    </property>
    <property name="text">
     <string>Auto reset</string>
