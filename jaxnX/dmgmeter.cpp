@@ -169,7 +169,7 @@ void DmgMeter::SetIsSave(bool IsSave)
     if (IsSave==true)
     {
         file.open(QIODevice::Append);
-        //stream << "[ " << QDateTime::currentDateTime().toString("H.m.s - dddd MMMM yyyy") << " ]\n";
+        stream << "[ " << QDateTime::currentDateTime().toString("H:m:s - dddd MM yyyy") << " ]\n";
     }
     else
     {

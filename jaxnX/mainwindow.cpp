@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
 
     //this->setWindowFlags(Qt::WindowStaysOnTopHint);
-    this->setWindowFlags( Qt::X11BypassWindowManagerHint | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
+    this->setWindowFlags(Qt::WindowStaysOnTopHint );
     QObject::connect(ui->actionEnableOpacity, SIGNAL(triggered(bool)), this, SLOT(EnableOpacity(bool)));
     QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
     m_RecorderThread.start();
@@ -45,6 +45,7 @@ void MainWindow::EnableOpacity(bool isOpaque)
 void MainWindow::LinkToWebsite()
 {
     QDesktopServices::openUrl(QUrl(MAINWINDOW_WEBSITE_URL));
+
 }
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
