@@ -1,6 +1,7 @@
 #include "dmgmeter.h"
 #include <QString>
 #include <QDebug>
+#include <QDateTime>
 
 using namespace GW2;
 
@@ -49,6 +50,7 @@ void DmgMeter::EvaluateLine(const QString& params)
         m_IsActive = true;
         m_Timer.start(DMGMETER_UPDATE_IN_MSEC);
         m_Dps = m_Dmg;
+
     }
 }
 
@@ -62,7 +64,11 @@ DmgMeter::DmgMeter() :
     m_MaxDmg(0),
     m_Timer_i(0),
     m_IsActive(false),
-    m_IsAutoResetting(false)
+    m_IsAutoResetting(false),
+    m_filename("./LOGS/"+QDateTime::currentDateTime().toString("H.m.s")+".txt"),
+    file(m_filename),
+    stream(&file),
+    m_isAutoSaving(false)
 
 {
     QObject::connect(&m_Timer, SIGNAL(timeout()), this, SLOT(ComputeDps()));
@@ -76,6 +82,7 @@ DmgMeter::DmgMeter() :
 
 DmgMeter::~DmgMeter()
 {
+
 }
 
 bool DmgMeter::IsActive() const
@@ -83,18 +90,24 @@ bool DmgMeter::IsActive() const
     return m_IsActive;
 }
 
+
 void DmgMeter::ComputeDps()
 {
     ++m_TimeSinceCombat;
     ++m_TimeSinceEvaluation;
     ++m_Timer_i;
     m_Dps = m_Dmg / m_Timer_i;
+    if (m_isAutoSaving==true)
+    {
+        stream << m_Timer_i <<";" << m_Dps << "\n";
+    }
 
     emit RequestDpsUpdate(m_Dps);
-    if (m_TimeSinceEvaluation >= 3)
+    if (m_TimeSinceEvaluation >= 5)
     {
         // No data received since evaluation time. End evaluation
         m_Timer.stop();
+        file.close();
         m_IsActive = false;
         if (m_IsAutoResetting)
         {
@@ -115,6 +128,7 @@ void DmgMeter::EvaluateImage(const QImage& image, const ImageAttributes& imageAt
         if (params == "")
         {
             ++offset;
+
             ++offset2;
         }
         else
@@ -139,11 +153,28 @@ void DmgMeter::Reset(bool emitSignals)
     m_Dps = 0;
     m_MaxDmg = 0;
     m_TimeSinceCombat = 0;
+    stream << "[ " << QDateTime::currentDateTime().toString("H:m:s - dddd MM yyyy") << " ]\n";
+
+   //
     if (emitSignals)
     {
         emit RequestDmgUpdate(m_Dmg);
         emit RequestDpsUpdate(m_Dps);
         emit RequestMaxDmgUpdate(m_MaxDmg);
+    }
+}
+void DmgMeter::SetIsSave(bool IsSave)
+{
+    m_isAutoSaving=IsSave;
+    if (IsSave==true)
+    {
+        file.open(QIODevice::Append);
+        //stream << "[ " << QDateTime::currentDateTime().toString("H.m.s - dddd MMMM yyyy") << " ]\n";
+    }
+    else
+    {
+        file.close();
+        m_filename="./LOGS/"+QDateTime::currentDateTime().toString("H.m.s")+".txt";
     }
 }
 
@@ -154,4 +185,6 @@ void DmgMeter::SetIsAutoResetting(bool isAutoResetting)
     {
         Reset(false);
     }
+
 }
+

@@ -1,0 +1,16 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\imagereader.o
+./debug\imageattributes.o
+./debug\charactergrid.o
+./debug\characterpattern.o
+./debug\screenrecorder.o
+./debug\dmgmeter.o
+./debug\screenrecorderthread.o
+./debug\qrc_Icons.o
+./debug\moc_mainwindow.o
+./debug\moc_screenrecorder.o
+./debug\moc_dmgmeter.o
+./debug\moc_screenrecorderthread.o
+);

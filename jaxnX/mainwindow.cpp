@@ -12,7 +12,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
-    this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint);
+
+    //this->setWindowFlags(Qt::WindowStaysOnTopHint);
+    this->setWindowFlags( Qt::X11BypassWindowManagerHint | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     QObject::connect(ui->actionEnableOpacity, SIGNAL(triggered(bool)), this, SLOT(EnableOpacity(bool)));
     QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
     m_RecorderThread.start();
@@ -32,14 +34,29 @@ void MainWindow::EnableOpacity(bool isOpaque)
     if (isOpaque)
     {
         this->setWindowOpacity(0.4);
-    }
+      }
     else
     {
         this->setWindowOpacity(1.0);
+
     }
 }
 
 void MainWindow::LinkToWebsite()
 {
     QDesktopServices::openUrl(QUrl(MAINWINDOW_WEBSITE_URL));
+}
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    m_nMouseClick_X_Coordinate = event->x();
+    m_nMouseClick_Y_Coordinate = event->y();
+}
+void MainWindow::mouseMoveEvent(QMouseEvent *event)
+{
+    move(event->globalX()-m_nMouseClick_X_Coordinate,event->globalY()-m_nMouseClick_Y_Coordinate);
+}
+
+void GW2::MainWindow::on_actionExit_triggered()
+{
+    MainWindow::close();
 }

@@ -1,9 +1,16 @@
 <RCC>
     <qresource prefix="/">
-        <file>Auto_Reset.png</file>
-        <file>Help.png</file>
+        <file>automatic_reset.png</file>
+        <file>automatic_reset_on.png</file>
+        <file>delete.png</file>
         <file>Opacity.png</file>
-        <file>Reset.png</file>
-        <file>Auto_Reset_On.png</file>
+        <file>save.png</file>
+        <file>save_on.png</file>
+        <file>settings.png</file>
+        <file>view_opacity.png</file>
+        <file>view_opacity_on.png</file>
+        <file>cross.png</file>
+        <file>magnifier.png</file>
+        <file>jaxnX_jaba.png</file>
     </qresource>
 </RCC>

@@ -19,6 +19,7 @@ void ScreenRecorderThread::run()
     QObject::connect(dmgMeter, SIGNAL(RequestMaxDmgUpdate(int)), this, SLOT(UpdateMaxDmg(int)));
     QObject::connect(m_pUi->actionReset, SIGNAL(triggered()), dmgMeter, SLOT(Reset()));
     QObject::connect(m_pUi->actionAutoReset, SIGNAL(triggered(bool)), dmgMeter, SLOT(SetIsAutoResetting(bool)));
+    QObject::connect(m_pUi->actionSave,SIGNAL(triggered(bool)),dmgMeter,SLOT(SetIsSave(bool)));
     r.StartRecording();
 
     exec();
@@ -81,4 +82,9 @@ void ScreenRecorderThread::UpdateMaxDmg(int maxDmg)
     {
         maxDmgLabel->setStyleSheet(DmgMeter::s_LowStyle);
     }
+}
+
+void GW2::ScreenRecorderThread::on_actionSave_changed()
+{
+
 }

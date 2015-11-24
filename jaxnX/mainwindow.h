@@ -5,6 +5,7 @@
 
 #include <QMainWindow>
 #include "screenrecorderthread.h"
+#include <QMouseEvent>
 
 namespace Ui {
     class MainWindow;
@@ -19,6 +20,10 @@ namespace GW2
     private:
         Ui::MainWindow *ui;
         ScreenRecorderThread m_RecorderThread;
+        void mousePressEvent(QMouseEvent *event);
+        void mouseMoveEvent(QMouseEvent *event);
+        int m_nMouseClick_X_Coordinate;
+        int m_nMouseClick_Y_Coordinate;
 
     public:
         explicit MainWindow(QWidget *parent = 0);
@@ -27,7 +32,9 @@ namespace GW2
     private slots:
         void EnableOpacity(bool isOpaque);
         void LinkToWebsite();
+        void on_actionExit_triggered();
     };
 }
+
 
 #endif // MAINWINDOW_H

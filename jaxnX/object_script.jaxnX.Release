@@ -1,0 +1,16 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\imagereader.o
+./release\imageattributes.o
+./release\charactergrid.o
+./release\characterpattern.o
+./release\screenrecorder.o
+./release\dmgmeter.o
+./release\screenrecorderthread.o
+./release\qrc_Icons.o
+./release\moc_mainwindow.o
+./release\moc_screenrecorder.o
+./release\moc_dmgmeter.o
+./release\moc_screenrecorderthread.o
+);

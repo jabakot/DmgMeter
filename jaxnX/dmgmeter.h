@@ -14,6 +14,8 @@
 
 #include <QTimer>
 #include "imagereader.h"
+#include <QFile>
+#include <QTextStream>
 
 namespace GW2
 {
@@ -34,6 +36,11 @@ namespace GW2
         int m_Timer_i;
         bool m_IsActive;
         bool m_IsAutoResetting;
+        QString m_filename;
+        QFile file;
+        QTextStream stream;
+        bool m_isAutoSaving;
+
 
         void EvaluateLine(const QString& params);
 
@@ -62,6 +69,7 @@ namespace GW2
         void EvaluateImage(const QImage& image, const ImageAttributes& imageAttributes);
         void Reset(bool emitSignals = true);
         void SetIsAutoResetting(bool isAutoResetting);
+        void SetIsSave(bool isSave);
     };
 }
 
