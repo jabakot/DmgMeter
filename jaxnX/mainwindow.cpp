@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QUrl>
 #include <QDesktopServices>
+#include <QInputDialog>
+#include <QDebug>
 
 using namespace GW2;
 
@@ -12,11 +14,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
-
-    //this->setWindowFlags(Qt::WindowStaysOnTopHint);
-    this->setWindowFlags(Qt::WindowStaysOnTopHint );
+   // this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint );
     QObject::connect(ui->actionEnableOpacity, SIGNAL(triggered(bool)), this, SLOT(EnableOpacity(bool)));
     QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
+
     m_RecorderThread.start();
 }
 

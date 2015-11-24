@@ -2,6 +2,7 @@
 #include <QString>
 #include <QDebug>
 #include <QDateTime>
+#include <QSettings>
 
 using namespace GW2;
 
@@ -68,7 +69,8 @@ DmgMeter::DmgMeter() :
     m_filename("./LOGS/"+QDateTime::currentDateTime().toString("H.m.s")+".txt"),
     file(m_filename),
     stream(&file),
-    m_isAutoSaving(false)
+    m_isAutoSaving(false),
+    NickName("anon")
 
 {
     QObject::connect(&m_Timer, SIGNAL(timeout()), this, SLOT(ComputeDps()));
@@ -154,6 +156,7 @@ void DmgMeter::Reset(bool emitSignals)
     m_MaxDmg = 0;
     m_TimeSinceCombat = 0;
     stream << "[ " << QDateTime::currentDateTime().toString("H:m:s - dddd MM yyyy") << " ]\n";
+//
 
    //
     if (emitSignals)
@@ -166,9 +169,11 @@ void DmgMeter::Reset(bool emitSignals)
 void DmgMeter::SetIsSave(bool IsSave)
 {
     m_isAutoSaving=IsSave;
+    DmgMeter::SyncNickName();
     if (IsSave==true)
     {
         file.open(QIODevice::Append);
+        stream << "{" << NickName << "}\n";
         stream << "[ " << QDateTime::currentDateTime().toString("H:m:s - dddd MM yyyy") << " ]\n";
     }
     else
@@ -187,4 +192,23 @@ void DmgMeter::SetIsAutoResetting(bool isAutoResetting)
     }
 
 }
+void DmgMeter::SetNickName(QString name)
+{
+    NickName=name;
+}
+void DmgMeter::SyncNickName()
+{
+    QSettings settings("cfg.ini", QSettings::IniFormat);
+    settings.sync();
+    settings.beginGroup("General");
+    QString name = settings.value("Name").toString();
+    if (name == NULL or name == "")
+    {
+//
+//WIP
 
+//
+    }
+    DmgMeter::SetNickName(name);
+    settings.endGroup();
+}

@@ -17,6 +17,7 @@ namespace GW2
     {
         Q_OBJECT
 
+
     private:
         Ui::MainWindow *ui;
         ScreenRecorderThread m_RecorderThread;
@@ -28,6 +29,7 @@ namespace GW2
     public:
         explicit MainWindow(QWidget *parent = 0);
         ~MainWindow();
+
 
     private slots:
         void EnableOpacity(bool isOpaque);
