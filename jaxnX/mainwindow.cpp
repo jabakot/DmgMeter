@@ -4,6 +4,10 @@
 #include <QDesktopServices>
 #include <QInputDialog>
 #include <QDebug>
+#include "settingsdialog.h"
+#include "dmgmeter.h"
+#include <QSettings>
+
 
 using namespace GW2;
 
@@ -14,11 +18,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
-   // this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint );
+    this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint );
     QObject::connect(ui->actionEnableOpacity, SIGNAL(triggered(bool)), this, SLOT(EnableOpacity(bool)));
     QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
-
     m_RecorderThread.start();
+
 }
 
 MainWindow::~MainWindow()
@@ -61,4 +65,10 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 void GW2::MainWindow::on_actionExit_triggered()
 {
     MainWindow::close();
+}
+
+void GW2::MainWindow::on_actionSettings_triggered()
+{
+    settingsdialog *sd = new settingsdialog();
+    sd->show();
 }

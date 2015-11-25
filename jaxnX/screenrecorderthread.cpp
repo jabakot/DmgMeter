@@ -2,6 +2,7 @@
 #include "screenrecorder.h"
 #include <QDesktopWidget>
 #include <QtDebug>
+#include "settingsdialog.h"
 
 using namespace GW2;
 
@@ -13,6 +14,7 @@ void ScreenRecorderThread::run()
 
     ScreenRecorder r(m_DesktopId);
     const DmgMeter* dmgMeter = &r.m_DmgMeter;
+
     QObject::connect(&r, SIGNAL(RequestInfoUpdate(QString)), m_pUi->labelInfo, SLOT(setText(QString)));
     QObject::connect(dmgMeter, SIGNAL(RequestDmgUpdate(int)), this, SLOT(UpdateDmg(int)));
     QObject::connect(dmgMeter, SIGNAL(RequestDpsUpdate(double)), this, SLOT(UpdateDps(double)));
@@ -20,6 +22,7 @@ void ScreenRecorderThread::run()
     QObject::connect(m_pUi->actionReset, SIGNAL(triggered()), dmgMeter, SLOT(Reset()));
     QObject::connect(m_pUi->actionAutoReset, SIGNAL(triggered(bool)), dmgMeter, SLOT(SetIsAutoResetting(bool)));
     QObject::connect(m_pUi->actionSave,SIGNAL(triggered(bool)),dmgMeter,SLOT(SetIsSave(bool)));
+    QObject::connect(dmgMeter,SIGNAL(RequestSettingsPopup()),this,SLOT(SettingsPopup()));
     r.StartRecording();
 
     exec();
@@ -82,9 +85,18 @@ void ScreenRecorderThread::UpdateMaxDmg(int maxDmg)
     {
         maxDmgLabel->setStyleSheet(DmgMeter::s_LowStyle);
     }
-}
 
+}
+void ScreenRecorderThread::SettingsPopup()
+{
+    settingsdialog *sd = new settingsdialog();
+    sd->setWindowFlags(Qt::WindowStaysOnTopHint);
+    sd->show();
+    sd->setFocus();
+
+}
 void GW2::ScreenRecorderThread::on_actionSave_changed()
 {
 
 }
+

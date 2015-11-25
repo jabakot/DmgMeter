@@ -40,12 +40,12 @@ namespace GW2
         QFile file;
         QTextStream stream;
         bool m_isAutoSaving;
-        QString NickName;
+
+
 
 
         void EvaluateLine(const QString& params);
         void SetNickName(QString name);
-        void GetNickName();
         void SyncNickName();
 
         friend class ScreenRecorder;
@@ -55,6 +55,10 @@ namespace GW2
         static const QString s_NormalStyle;
         static const QString s_HighStyle;
         static const QString s_UltraStyle;
+        static QString GetNickName();
+        static QString NickName;
+;
+
 
 
         DmgMeter();
@@ -66,6 +70,7 @@ namespace GW2
         void RequestDmgUpdate(int);
         void RequestDpsUpdate(double);
         void RequestMaxDmgUpdate(int);
+        void RequestSettingsPopup();
 
     private slots:
         void ComputeDps();

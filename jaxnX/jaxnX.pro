@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     characterpattern.cpp \
     screenrecorder.cpp \
     dmgmeter.cpp \
-    screenrecorderthread.cpp
+    screenrecorderthread.cpp \
+    settingsdialog.cpp
 
 HEADERS  += mainwindow.h \
     imagereader.h \
@@ -29,9 +30,11 @@ HEADERS  += mainwindow.h \
     characterpattern.h \
     screenrecorder.h \
     dmgmeter.h \
-    screenrecorderthread.h
+    screenrecorderthread.h \
+    settingsdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    settingsdialog.ui
 
 RESOURCES += \
     Icons/Icons.qrc

@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QDateTime>
 #include <QSettings>
-
+#include "settingsdialog.h"
 using namespace GW2;
 
 const QString DmgMeter::s_LowStyle = "color: rgb(255, 255, 255);";
@@ -69,8 +69,8 @@ DmgMeter::DmgMeter() :
     m_filename("./LOGS/"+QDateTime::currentDateTime().toString("H.m.s")+".txt"),
     file(m_filename),
     stream(&file),
-    m_isAutoSaving(false),
-    NickName("anon")
+    m_isAutoSaving(false)
+
 
 {
     QObject::connect(&m_Timer, SIGNAL(timeout()), this, SLOT(ComputeDps()));
@@ -173,7 +173,7 @@ void DmgMeter::SetIsSave(bool IsSave)
     if (IsSave==true)
     {
         file.open(QIODevice::Append);
-        stream << "{" << NickName << "}\n";
+        stream << "{" << this->NickName << "}\n";
         stream << "[ " << QDateTime::currentDateTime().toString("H:m:s - dddd MM yyyy") << " ]\n";
     }
     else
@@ -194,7 +194,8 @@ void DmgMeter::SetIsAutoResetting(bool isAutoResetting)
 }
 void DmgMeter::SetNickName(QString name)
 {
-    NickName=name;
+
+  this->NickName=name;
 }
 void DmgMeter::SyncNickName()
 {
@@ -202,13 +203,17 @@ void DmgMeter::SyncNickName()
     settings.sync();
     settings.beginGroup("General");
     QString name = settings.value("Name").toString();
-    if (name == NULL or name == "")
+    settings.endGroup();
+
+    if (name == NULL or name == "" or name.remove(" ").length()==0)
     {
 //
 //WIP
-
+    emit RequestSettingsPopup();
 //
     }
     DmgMeter::SetNickName(name);
     settings.endGroup();
 }
+
+QString DmgMeter::NickName;

@@ -26,10 +26,10 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>jaxnX [Getinaksed]</string>
+   <string>jaxnX</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="Icons/Icons.qrc">
+   <iconset>
     <normaloff>:/jaxnX_jaba.png</normaloff>:/jaxnX_jaba.png</iconset>
   </property>
   <property name="styleSheet">
@@ -282,7 +282,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/automatic_reset.png</normaloff>
      <normalon>:/automatic_reset_on.png</normalon>:/automatic_reset.png</iconset>
    </property>
@@ -295,7 +295,7 @@
   </action>
   <action name="actionReset">
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/delete.png</normaloff>:/delete.png</iconset>
    </property>
    <property name="text">
@@ -310,7 +310,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/Opacity.png</normaloff>
      <normalon>:/view_opacity_on.png</normalon>:/Opacity.png</iconset>
    </property>
@@ -323,7 +323,7 @@
   </action>
   <action name="actionHelp">
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/magnifier.png</normaloff>:/magnifier.png</iconset>
    </property>
    <property name="text">
@@ -338,7 +338,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/save.png</normaloff>
      <normalon>:/save_on.png</normalon>:/save.png</iconset>
    </property>
@@ -351,7 +351,7 @@
   </action>
   <action name="actionSettings">
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/settings.png</normaloff>:/settings.png</iconset>
    </property>
    <property name="text">
@@ -363,7 +363,7 @@
   </action>
   <action name="actionExit">
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/cross.png</normaloff>:/cross.png</iconset>
    </property>
    <property name="text">
@@ -378,8 +378,6 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="Icons/Icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

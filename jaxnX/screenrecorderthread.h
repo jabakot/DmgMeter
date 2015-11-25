@@ -25,6 +25,7 @@ namespace GW2
         void UpdateDps(double dps);
         void UpdateMaxDmg(int maxDmg);
         void on_actionSave_changed();
+        void SettingsPopup();
     };
 }
 

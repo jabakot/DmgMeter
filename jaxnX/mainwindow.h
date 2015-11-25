@@ -35,6 +35,7 @@ namespace GW2
         void EnableOpacity(bool isOpaque);
         void LinkToWebsite();
         void on_actionExit_triggered();
+        void on_actionSettings_triggered();
     };
 }
 
